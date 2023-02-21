@@ -1,17 +1,25 @@
 FROM python:3.9.6
 
+RUN apt-get update
+RUN apt-get install -y wget libcudnn8 gnupg2
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
+
+RUN wget -qO - https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub | apt-key add - && \
+    echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+    cuda-cudart-11-4 \
+    libcudnn8 \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 WORKDIR /code
 
-RUN apt-get update
-RUN apt-get install -y wget
-RUN apt-key del 7fa2af80
-RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb
-RUN dpkg -i cuda-keyring_1.0-1_all.deb
-RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
-
-RUN pip install -U notigram
+EXPOSE 8000
 ENV PYHTONUNBUFFERED=1
-RUN export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64
+COPY /usr/local/nvidia/lib64/libcuda.so.1 /usr/local/nvidia/lib64/libcuda.so.1
 
 COPY ./ /code
 RUN python -m pip install --upgrade pip
