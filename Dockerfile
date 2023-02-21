@@ -3,10 +3,13 @@ FROM python:3.9.6
 RUN apt-get update
 RUN apt-get install -y \
     wget \
-    libcudnn8 \
     gnupg2
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
+
+RUN sudo add-apt-repository multiverse
+RUN sudo apt update
+RUN sudo apt install nvidia-cuda-toolkit
 
 RUN wget -qO - https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub | apt-key add - && \
     echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
