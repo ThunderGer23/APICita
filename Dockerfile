@@ -1,10 +1,7 @@
 FROM python:3.9.6
 
 RUN apt-get update
-RUN apt-get install -y \
-    wget \
-    gnupg2 \
-    nvidia-cuda-toolkit
+RUN apt-get install -y wget libcudnn8 gnupg2
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
@@ -24,9 +21,9 @@ EXPOSE 8000
 ENV PYHTONUNBUFFERED=1
 
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/libcuda1-460_460.73.01-0ubuntu1_amd64.deb
-RUN ar -xvf libcuda1-460_460.73.01-0ubuntu1_amd64.deb && \
-    tar -xvf data.tar.xz && \
-    mv libcuda.so.1 /usr/local/nvidia/lib64/libcuda.so.1
+RUN ar -xvf libcuda1-460_460.73.01-0ubuntu1_amd64.deb
+RUN tar -xvf data.tar.xz
+RUN mv libcuda.so.1 /usr/local/nvidia/lib64/libcuda.so.1
 
 COPY ./ /code
 RUN python -m pip install --upgrade pip
