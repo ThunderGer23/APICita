@@ -19,7 +19,11 @@ WORKDIR /code
 
 EXPOSE 8000
 ENV PYHTONUNBUFFERED=1
-COPY /usr/local/nvidia/lib64/libcuda.so.1 /usr/local/nvidia/lib64/libcuda.so.1
+
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/libcuda1-460_460.73.01-0ubuntu1_amd64.deb
+RUN ar -xvf libcuda1-460_460.73.01-0ubuntu1_amd64.deb
+RUN tar -xvf data.tar.xz
+COPY libcuda.so.1 /usr/local/nvidia/lib64/libcuda.so.1
 
 COPY ./ /code
 RUN python -m pip install --upgrade pip
