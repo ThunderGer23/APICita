@@ -8,7 +8,7 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
 # RUN add-apt-repository multiverse
-RUN apt-get nvidia-cuda-toolkit
+RUN apt-get install -y nvidia-cuda-toolkit
 RUN apt update
 
 RUN wget -qO - https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub | apt-key add - && \
