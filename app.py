@@ -11,7 +11,7 @@ app = FastAPI(
     description= "API que determina si la cita de un documento esta en formato APA o IEEE",
     version = "1.0",
     contact={
-        "name": "Luis Gerardo Baesa Ramirez, Susana Itzel Garduño Sandoval, Arturo Emmanuel Toledo Aguado",
+        "name": "Luis Gerardo Baeza Ramirez, Susana Itzel Garduño Sandoval, Arturo Emmanuel Toledo Aguado",
         "url": "https://github.com/ThunderGer23/APICita",
         "email": "dp@x-force.example.com",
     },
