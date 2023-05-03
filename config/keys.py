@@ -1,1 +1,1 @@
-MongoCli = 'mongodb://mongo:9jPZNCdV52Zznb0CPYaN@containers-us-west-156.railway.app:7631'
+MongoCli = 'mongodb://mongo:w9nv2Uj41vovywuLLfV3@containers-us-west-190.railway.app:5921'
