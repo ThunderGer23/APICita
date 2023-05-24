@@ -1,7 +1,7 @@
 FROM python:3.9.6
 
 RUN apt-get update
-RUN apt-get install -y wget libcudnn8 gnupg2
+RUN apt-get install -y wget gnupg2
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
