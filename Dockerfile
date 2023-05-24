@@ -5,9 +5,7 @@ RUN apt-get install -y wget gnupg2
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
-RUN wget -qO - https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub | apt-key add - && \
-    echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     cuda-cudart-11-4 \
     libcudnn8 \
